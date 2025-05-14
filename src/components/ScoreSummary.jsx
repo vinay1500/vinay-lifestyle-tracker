@@ -1,0 +1,1 @@
+// Score summary bar
