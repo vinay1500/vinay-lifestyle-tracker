@@ -1,0 +1,51 @@
+# This workflow will build and deploy your application to Firebase Hosting on a push to your main branch
+# and create preview deployments for pull requests to your main branch.
+
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    # Replace YOUR_MAIN_BRANCH with the name of your default branch (e.g., main, master)
+    branches:
+      - master
+  pull_request:
+    # Replace YOUR_MAIN_BRANCH with the name of your default branch (e.g., main, master)
+    branches:
+      - master
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        # Uses the checkout action to get your repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        # Uses the setup-node action to set up Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or your preferred Node.js version (e.g., '18', '20')
+          cache: 'npm' # Or 'yarn', 'pnpm' if you use a different package manager
+
+      - name: Install dependencies
+        # Installs your project's dependencies
+        run: npm ci # Use 'npm install' if you prefer, or 'yarn install', 'pnpm install'
+
+      # Uncomment this step if your project requires a build step (e.g., React, Vue, Angular, Svelte)
+      # - name: Build project
+      #   run: npm run build # Replace 'npm run build' with your project's build command if different
+
+      - name: Deploy to Firebase Hosting
+        # Uses the official Firebase Hosting GitHub Action
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          # Your Firebase project ID
+          repoToken: ${{ secrets.GITHUB_TOKEN }} # Provided automatically by GitHub for PRs
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }} # The secret you created in GitHub
+          projectId: vinay-lifestyle-tracker1 # Replace with your actual Firebase project ID
+
+        # Optional: If you want to comment on the pull request with the preview URL
+        env:
+          FIREBASE_CLI_PREVIEWS: hostingchannels
