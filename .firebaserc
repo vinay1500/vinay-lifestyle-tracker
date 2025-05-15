@@ -1,1 +1,7 @@
-{ "projects": { "default": "your-firebase-project-id" } }
+{
+  "projects": {
+    "default": "vinay-lifestyle-tracker1"
+  },
+  "targets": {},
+  "etags": {}
+}
