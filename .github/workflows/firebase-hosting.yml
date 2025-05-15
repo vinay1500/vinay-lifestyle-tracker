@@ -34,8 +34,8 @@ jobs:
         run: npm ci # Use 'npm install' if you prefer, or 'yarn install', 'pnpm install'
 
       # Uncomment this step if your project requires a build step (e.g., React, Vue, Angular, Svelte)
-      # - name: Build project
-      #   run: npm run build # Replace 'npm run build' with your project's build command if different
+       - name: Build project
+         run: npm run build # Replace 'npm run build' with your project's build command if different
 
       - name: Deploy to Firebase Hosting
         # Uses the official Firebase Hosting GitHub Action
